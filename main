@@ -51,5 +51,8 @@ with engine.connect() as conn:
     res = conn.execute(query)
     df = pd.DataFrame(res.fetchall())
 
-    not_tb = df[~df['table_name'].str.contains('TEST', na=False, case=False)]
-    print(data)
+    data = df[~df['table_name'].str.contains('TEST', na=False, case=False)]
+
+    loc = 'D:/'
+    file_name = 'table_spec.csv'
+    data.to_csv(loc+file_name, sep=',',encoding='utf-8-sig')
